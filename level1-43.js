@@ -1,13 +1,13 @@
-// javascript coding test - 최소 직사각형 (lv1)
-function solution(sizes) { 
-    let answer = 1 // 가로의 길이를 제일 긴 변으로 설정 후 회전 
-    for (let i = 0; i < sizes.length; i++) { 
-        if (sizes[i][0] < sizes[i][1]) {
-             ;[sizes[i][0], sizes[i][1]] = [sizes[i][1], sizes[i][0]]
-        } 
+// javascript coding test - 2016 (lv1)
+function solution(a, b) {
+    let answer="";
+    let sum_day = 0;
+    const day = ["THU","FRI","SAT","SUN","MON","TUE","WED"];
+    const month = [31,29,31,30,31,30,31,31,30,31,30,31];
+    for(let i=0;i<a-1;i++){
+        sum_day += month[i];
     }
-    let x = sizes.sort((a, b) => b[0] - a[0])[0][0] 
-    let y = sizes.sort((a, b) => b[1] - a[1])[0][1] 
-    answer = x * y 
-    return answer 
+    sum_day += b;
+    answer += day[sum_day%7];
+    return answer;
 }
