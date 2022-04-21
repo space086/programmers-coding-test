@@ -1,13 +1,9 @@
-// javascript coding test - 2016 (lv1)
-function solution(a, b) {
-    let answer="";
-    let sum_day = 0;
-    const day = ["THU","FRI","SAT","SUN","MON","TUE","WED"];
-    const month = [31,29,31,30,31,30,31,31,30,31,30,31];
-    for(let i=0;i<a-1;i++){
-        sum_day += month[i];
+// javascript coding test - 3진법 뒤집기 (lv1)
+function solution(n) {
+    const answer = [];
+    while(n !== 0) {
+        answer.unshift(n % 3);
+        n = Math.floor(n/3);
     }
-    sum_day += b;
-    answer += day[sum_day%7];
-    return answer;
+    return answer.reduce((acc,v,i) => acc + (v * Math.pow(3, i)),0);   
 }
