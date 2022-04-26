@@ -1,23 +1,27 @@
 // javascript coding test - 체육복 (lv1)
 function solution(n, lost, reserve) {
-  for(let i = 0 ; i< reserve.length;i++){
-      let haslost = lost.some((el)=> el == reserve[i])
-      if (haslost){
-          lost = lost.filter((el)=> el !== reserve[i])
-          reserve[i] = 0;
+  var answer = n-lost.length;
+  
+  let realLost=lost.filter((l)=>!reserve.includes(l));
+  let realReserve=reserve.filter((r)=>!lost.includes(r));
+  answer+=lost.length-realLost.length;
+  
+  realLost.sort((a,b)=>a-b);
+  
+  realLost.forEach((l)=>{
+      if(realReserve.length===0){
+          return;
       }
-  }
-  reserve = reserve.filter(v=>v)
-
-  for(let i = 0 ; i< reserve.length;i++){
-      for(let j = 0 ; j< lost.length;j++){
-          if (Math.abs(reserve[i]-lost[j])<=1){
-              reserve[i] = 0
-              lost[j] = 0
-              break;
-          }
+      
+      if(realReserve.includes(l-1)){
+          realReserve=realReserve.filter((r)=>r!==l-1);
+          answer++;
       }
-
-  }
-  return n - lost.filter(v=>v).length
+      else if(realReserve.includes(l+1)){
+          realReserve=realReserve.filter((r)=>r!==l+1);
+          answer++;
+      }
+      
+  })
+  return answer;
 }
